@@ -1,0 +1,9 @@
+replicaName=mm-sql-replica
+masterInstanceName=mm-sql
+newReplicaName=mm-sql-new-replica
+targetRegion=europe-southwest1
+newTargetRegion=europe-west8
+project=PROJECT_ID
+network=default
+HA=false
+env=prod
