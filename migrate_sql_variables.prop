@@ -1,6 +1,6 @@
-replicaName=mm-sql-replica
-masterInstanceName=mm-sql
-newReplicaName=mm-sql-new-replica
+masterInstanceName=mysql-db2
+replicaName=mysql-db-rep
+newReplicaName=mysql-db-repl-new
 targetRegion=europe-southwest1
 newTargetRegion=europe-west8
 project=PROJECT_ID
