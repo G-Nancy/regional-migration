@@ -21,10 +21,6 @@ getProperty newReplicaName
 echo "Key = newReplicaName ; Value = " ${prop_value}
 newReplicaName=${prop_value}
 
-getProperty newTargetRegion
-echo "Key = newTargetRegion ; Value = " ${prop_value}
-newTargetRegion=${prop_value}
-
 getProperty masterInstanceName
 echo "Key = masterInstanceName ; Value = " ${prop_value}
 masterInstanceName=${prop_value}
@@ -36,10 +32,6 @@ targetRegion=${prop_value}
 getProperty project
 echo "Key = project ; Value = " ${prop_value}
 project=${prop_value}
-
-getProperty HA
-echo "Key = HA ; Value = " ${prop_value}
-HA=${prop_value}
 
 getProperty env
 echo "Key = env ; Value = " ${prop_value}
@@ -66,8 +58,8 @@ gcloud sql instances patch $replicaName --activation-policy ALWAYS
 #Update Cloud DNS with name "mysql.test.local." to point to promoted Cloud SQL instance
 gcloud dns --project=$project record-sets update mysql.test.local. --type="A" --zone="test" --rrdatas=$(gcloud sql instances describe $replicaName --project $project --format 'value(ipAddresses.ipAddress)' --project $project ) --ttl="5" --quiet
 
-echo "gcloud beta sql instances create $newReplicaName --project=$project --master-instance-name=$replicaName --network=$network --no-assign-ip --region=$newTargetRegion --labels env=$env"
-gcloud beta sql instances create $newReplicaName --project=$project --master-instance-name=$replicaName --network=$network --no-assign-ip --region $newTargetRegion --labels env=$env --quiet
+echo "gcloud beta sql instances create $newReplicaName --project=$project --master-instance-name=$replicaName --network=$network --no-assign-ip --region=$targetRegion --labels env=$env"
+gcloud beta sql instances create $newReplicaName --project=$project --master-instance-name=$replicaName --network=$network --no-assign-ip --region $targetRegion --labels env=$env --quiet
 
 end=`date +%s`
 
