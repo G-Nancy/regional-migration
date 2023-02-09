@@ -1,7 +1,9 @@
+project=PROJECT_ID
 masterInstanceName=mysql-db2
 replicaName=mysql-db-rep
 newReplicaName=mysql-db-repl-new
 targetRegion=europe-west8
-project=PROJECT_ID
 network=default
 env=prod
+dnsName=mysql.test.local
+dnsZoneName=mysql-test-zone
