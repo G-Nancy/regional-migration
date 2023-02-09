@@ -41,6 +41,14 @@ getProperty network
 echo "Key = network ; Value = " ${prop_value}
 network=${prop_value}
 
+getProperty dnsName
+echo "Key = dnsName ; Value = " ${prop_value}
+env=${prop_value}
+
+getProperty dnsZoneName
+echo "Key = dnsZoneName ; Value = " ${prop_value}
+network=${prop_value}
+
 gcloud config set project $project
 
 #Make the primary instance unavailable
@@ -56,7 +64,7 @@ gcloud sql instances promote-replica $replicaName --quiet
 gcloud sql instances patch $replicaName --activation-policy ALWAYS
 
 #Update Cloud DNS with name "mysql.test.local." to point to promoted Cloud SQL instance
-gcloud dns --project=$project record-sets update mysql.test.local. --type="A" --zone="test" --rrdatas=$(gcloud sql instances describe $replicaName --project $project --format 'value(ipAddresses.ipAddress)' --project $project ) --ttl="5" --quiet
+gcloud dns --project=$project record-sets update $dnsName --type="A" --zone=$dnsZoneName --rrdatas=$(gcloud sql instances describe $replicaName --project $project --format 'value(ipAddresses.ipAddress)' --project $project ) --ttl="5" --quiet
 
 echo "gcloud beta sql instances create $newReplicaName --project=$project --master-instance-name=$replicaName --network=$network --no-assign-ip --region=$targetRegion --labels env=$env"
 gcloud beta sql instances create $newReplicaName --project=$project --master-instance-name=$replicaName --network=$network --no-assign-ip --region $targetRegion --labels env=$env --quiet
