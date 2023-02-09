@@ -1,9 +1,7 @@
 masterInstanceName=mysql-db2
 replicaName=mysql-db-rep
 newReplicaName=mysql-db-repl-new
-targetRegion=europe-southwest1
-newTargetRegion=europe-west8
+targetRegion=europe-west8
 project=PROJECT_ID
 network=default
-HA=false
 env=prod
