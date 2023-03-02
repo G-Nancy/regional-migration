@@ -5,5 +5,5 @@ newReplicaName=mysql-db-repl-new
 targetRegion=europe-west8
 network=default
 env=prod
-dnsName=mysql.test.local
+dnsName=mysql.test.local.
 dnsZoneName=mysql-test-zone
