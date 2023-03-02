@@ -43,11 +43,11 @@ network=${prop_value}
 
 getProperty dnsName
 echo "Key = dnsName ; Value = " ${prop_value}
-env=${prop_value}
+dnsName=${prop_value}
 
 getProperty dnsZoneName
 echo "Key = dnsZoneName ; Value = " ${prop_value}
-network=${prop_value}
+dnsZoneName=${prop_value}
 
 gcloud config set project $project
 
